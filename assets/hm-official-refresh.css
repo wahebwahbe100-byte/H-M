@@ -1,0 +1,193 @@
+/* H&M Bauelemente | Slim editorial section. Only the company/contact band is affected. */
+.hm-official {
+  background: #f5f7f9;
+  padding: 28px 0 35px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.hm-official__container.container {
+  width: min(1290px, calc(100% - 80px));
+  max-width: none;
+}
+.hm-official__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  min-height: 316px;
+  background: #fff;
+  border: 1px solid #e4eaf0;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(10, 35, 55, .075);
+  overflow: hidden;
+}
+.hm-official__story {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  isolation: isolate;
+  color: #fff;
+  background: #143750;
+  overflow: hidden;
+}
+.hm-official__image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+}
+.hm-official__story::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(9, 35, 56, .96) 0%, rgba(9, 35, 56, .88) 39%, rgba(9, 35, 56, .5) 77%, rgba(9, 35, 56, .25) 100%);
+  pointer-events: none;
+}
+.hm-official__story-copy { width: min(525px, 100%); padding: 29px 33px 29px 40px; }
+.hm-official__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 10px;
+  line-height: 1.35;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.hm-official__eyebrow--light { color: #e4f2fa; }
+.hm-official__eyebrow--dark { color: #3e6b86; }
+.hm-official__eyebrow-line { flex: none; width: 26px; height: 2px; background: #8fc5e3; }
+.hm-official__eyebrow--dark .hm-official__eyebrow-line { background: #3a85ac; }
+.hm-official__story h2 {
+  margin: 0 0 13px;
+  color: #fff;
+  font-size: clamp(27px, 2.55vw, 35px);
+  line-height: 1.13;
+  font-weight: 780;
+  letter-spacing: -.038em;
+}
+.hm-official__story h2 span { color: #f1f8fd; font-weight: 500; }
+.hm-official__story-copy > p:not(.hm-official__eyebrow) {
+  margin: 0 0 13px;
+  max-width: 445px;
+  color: rgba(248, 252, 255, .92);
+  font-size: 12.5px;
+  line-height: 1.56;
+}
+.hm-official__about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 5px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, .6);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.4;
+  transition: gap .2s ease;
+}
+.hm-official__about-link:hover { gap: 13px; }
+.hm-official__about-link svg { width: 15px; height: 15px; }
+.hm-official__contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 27px clamp(25px, 3.2vw, 44px);
+  background: #fff;
+}
+.hm-official__contact .hm-official__eyebrow { margin-bottom: 13px; }
+.hm-official__contact h3 {
+  margin: 0 0 11px;
+  color: #12334c;
+  font-size: clamp(24px, 2.1vw, 30px);
+  font-weight: 790;
+  line-height: 1.12;
+  letter-spacing: -.035em;
+}
+.hm-official__contact h3 span { color: #2b6688; }
+.hm-official__lead {
+  max-width: 435px;
+  margin: 0 0 17px;
+  color: #5d7180;
+  font-size: 12.5px;
+  line-height: 1.56;
+}
+.hm-official__advantages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 20px;
+  margin: 0 0 20px;
+  color: #23465c;
+}
+.hm-official__advantages span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.hm-official__advantages svg { flex: none; width: 16px; height: 16px; color: #3a89ae; }
+.hm-official__primary {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 43px;
+  padding: 10px 15px;
+  background: #123750;
+  border: 1px solid #123750;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.35;
+  transition: background .2s ease, border-color .2s ease;
+}
+.hm-official__primary:hover { background: #235f81; border-color: #235f81; }
+.hm-official__primary svg { flex: none; width: 17px; height: 17px; }
+.hm-official a:focus-visible { outline: 3px solid #7fd0f2; outline-offset: 3px; }
+@media (max-width: 1000px) and (min-width: 721px) {
+  .hm-official__container.container { width: calc(100% - 42px); }
+  .hm-official__panel { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); min-height: 345px; }
+  .hm-official__story-copy { padding: 26px 25px; }
+  .hm-official__contact { padding: 25px 22px; }
+  .hm-official__story h2 { font-size: clamp(26px, 3.35vw, 32px); }
+  .hm-official__contact h3 { font-size: clamp(23px, 2.9vw, 27px); }
+  .hm-official__advantages { gap: 9px 13px; }
+}
+@media (max-width: 720px) {
+  .hm-official { padding: 22px 0 29px; }
+  .hm-official__container.container { width: calc(100% - 28px); max-width: 510px; }
+  .hm-official__panel { display: block; min-height: 0; border-radius: 7px; }
+  .hm-official__story { min-height: 270px; }
+  .hm-official__story::after { background: linear-gradient(90deg, rgba(9, 35, 56, .96), rgba(9, 35, 56, .78) 65%, rgba(9, 35, 56, .50)); }
+  .hm-official__story-copy { padding: 26px 24px 24px; }
+  .hm-official__story h2 { font-size: clamp(27px, 6.8vw, 33px); margin-bottom: 12px; }
+  .hm-official__eyebrow { margin-bottom: 12px; font-size: 9px; }
+  .hm-official__story-copy > p:not(.hm-official__eyebrow) { font-size: 12px; margin-bottom: 12px; }
+  .hm-official__contact { padding: 25px 24px 24px; }
+  .hm-official__contact h3 { font-size: 27px; margin-bottom: 11px; }
+  .hm-official__lead { font-size: 12px; margin-bottom: 14px; }
+  .hm-official__advantages { gap: 8px 16px; margin-bottom: 17px; }
+  .hm-official__advantages span { font-size: 11px; }
+  .hm-official__primary { min-height: 43px; }
+}
+@media (max-width: 360px) {
+  .hm-official__story { min-height: 285px; }
+  .hm-official__story-copy { padding: 22px 18px; }
+  .hm-official__contact { padding: 23px 18px; }
+  .hm-official__story h2 { font-size: 26px; }
+  .hm-official__contact h3 { font-size: 25px; }
+  .hm-official__advantages { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hm-official a { transition: none !important; }
+}

@@ -1,0 +1,136 @@
+/* Picture sources retain the existing desktop images and slider geometry. */
+.hero .hero-slide > .hero-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: inherit;
+}
+
+@media (max-width: 680px) {
+  .hero {
+    display: block;
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(620px, 150vw, 760px);
+    height: auto;
+    padding: 0;
+    background: #0d2d46;
+  }
+  .hero .hero-slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    z-index: 0;
+  }
+  .hero .hero-slides .hero-slide:nth-child(n) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-position: center bottom;
+    filter: none !important;
+  }
+  .hero .hero-shade {
+    position: absolute;
+    inset: 0 !important;
+    width: 100%;
+    height: 100% !important;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(110deg, rgba(5, 29, 49, .50), rgba(5, 29, 49, .16) 58%, transparent 78%),
+      linear-gradient(180deg, rgba(5, 29, 49, .12), rgba(5, 29, 49, .12) 49%, transparent 75%) !important;
+  }
+  .hero .hero-inner {
+    position: relative;
+    z-index: 2;
+    width: calc(100% - 44px);
+    margin: 0 auto;
+    padding: clamp(88px, 24vw, 128px) 0 100px;
+  }
+  .hero .hero-content {
+    max-width: 410px;
+    margin: 0;
+    text-align: left;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .hero .eyebrow {
+    max-width: 340px;
+    font-size: 9px;
+    line-height: 1.55;
+    letter-spacing: .16em;
+    padding-top: 15px;
+    margin-bottom: 13px;
+    color: #fff !important;
+  }
+  .hero .eyebrow::before { width: 36px; }
+  .hero h1 {
+    font-size: clamp(34px, 9.6vw, 44px);
+    line-height: 1.06;
+    letter-spacing: -.035em;
+    margin-bottom: 16px;
+    color: #fff !important;
+    text-align: left;
+  }
+  .hero .hero-description {
+    max-width: 335px;
+    font-size: 13px;
+    line-height: 1.65;
+    margin-bottom: 20px;
+    color: #fff !important;
+    text-align: left;
+    text-shadow: 0 1px 8px rgba(0,0,0,.22);
+  }
+  .hero .hero-buttons {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+  .hero .hero-buttons .button {
+    flex: 0 1 auto;
+    width: auto;
+    min-width: 0;
+    min-height: 44px;
+    padding: 11px 12px;
+    font-size: 11px;
+    gap: 6px;
+    box-shadow: none;
+  }
+  .hero .hero-buttons .button:first-child { background: #fff; color: #0b2d45; }
+  .hero .hero-buttons .button-outline {
+    background: rgba(5,29,49,.55);
+    color: #fff;
+    border-color: rgba(255,255,255,.7);
+  }
+  .hero .hero-dots {
+    top: auto;
+    bottom: 18px;
+    left: 22px;
+    right: auto;
+    gap: 4px;
+    z-index: 4;
+  }
+  .hero .hero-dot {
+    width: 36px;
+    height: 32px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    position: relative;
+  }
+  .hero .hero-dot::after {
+    content: "";
+    position: absolute;
+    inset: 14px 3px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.55);
+  }
+  .hero .hero-dot.is-active::after { background: #fff; }
+}

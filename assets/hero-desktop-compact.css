@@ -1,0 +1,66 @@
+/* H&M Bauelemente — compact desktop hero (homepage only).
+   Preserve the original photos, 4-second slider and dedicated mobile styling. */
+@media (min-width:981px) {
+  .hero {
+    height:clamp(475px,57vh,520px);
+    min-height:475px;
+    display:grid;
+    align-items:center;
+    overflow:hidden;
+  }
+  .hero-inner {
+    width:min(var(--container),calc(100% - 104px));
+    padding:36px 0 42px;
+    display:flex;
+    align-items:center;
+  }
+  .hero-content {max-width:550px;}
+  .hero .eyebrow {
+    padding-top:16px;
+    margin-bottom:13px;
+    font-size:10px;
+    letter-spacing:.24em;
+  }
+  .hero .eyebrow::before {width:47px;}
+  .hero h1 {
+    font-size:clamp(43px,3.75vw,55px);
+    line-height:1.06;
+    margin-bottom:15px;
+    letter-spacing:-.037em;
+  }
+  .hero-description {
+    font-size:15px;
+    line-height:1.55;
+    max-width:465px;
+    margin-bottom:21px;
+  }
+  .hero-buttons {gap:10px;margin:0;}
+  .hero .button {
+    min-height:45px;
+    padding:10px 18px;
+    font-size:13px;
+    border-radius:5px;
+  }
+  .hero .button .icon {width:17px;height:17px;}
+  /* The navy falloff only supports legibility — no artificial fog or white glow. */
+  .hero-shade {
+    background:linear-gradient(90deg,rgba(7,27,43,.83) 0%,rgba(7,27,43,.70) 19%,rgba(7,27,43,.49) 34%,rgba(7,27,43,.21) 50%,rgba(7,27,43,.04) 68%,transparent 80%) !important;
+  }
+  .hero .hero-slides .hero-slide {object-position:center 49%;}
+  .hero .hero-slides .hero-slide:nth-child(1) {object-position:center 48%;}
+  .hero .hero-slides .hero-slide:nth-child(2) {object-position:center 53%;}
+  .hero .hero-slides .hero-slide:nth-child(3) {object-position:center 49%;}
+  .hero-dots {right:clamp(28px,5vw,78px);bottom:23px;}
+  .services-section {margin-top:-14px;}
+}
+/* 981–1120px: enough breathing room for a compact laptop viewport. */
+@media (min-width:981px) and (max-width:1120px) {
+  .hero-content {max-width:505px;}
+  .hero h1 {font-size:43px;}
+  .hero-description {font-size:14px;max-width:430px;}
+  .hero-inner {width:calc(100% - 76px);}
+}
+/* On narrower devices, use the existing mobile/tablet layout unchanged. */
+@media (prefers-reduced-motion:reduce) {
+  .hero .hero-slides .hero-slide {transition:none;}
+}

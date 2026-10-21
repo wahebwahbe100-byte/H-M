@@ -1,0 +1,223 @@
+/* Desktop hero rebuild: real photos are framed, not stretched or generated. */
+@media (min-width: 681px) {
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: clamp(475px, 36vw, 535px);
+    min-height: 0 !important;
+    overflow: hidden;
+    background: #0d2d46;
+    isolation: isolate;
+  }
+  .hero-slides {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    overflow:hidden;
+  }
+  .hero .hero-slides .hero-slide {
+    left:auto !important;
+    right:0 !important;
+    top:0 !important;
+    bottom:auto !important;
+    width:74% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    filter:none !important;
+    object-position:center 40% !important;
+  }
+  .hero .hero-slides .hero-slide:nth-child(1) {object-position:center 8% !important;}
+  .hero .hero-slides .hero-slide:nth-child(2) {object-position:center 16% !important;}
+  .hero .hero-slides .hero-slide:nth-child(3) {object-position:center 50% !important;}
+  .hero-shade {
+    position:absolute;
+    inset:0 !important;
+    width:100%; height:100%;
+    z-index:1;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg, #0c2b43 0%, #0c2b43 25%, rgba(12,43,67,.98) 32%, rgba(12,43,67,.83) 40%, rgba(12,43,67,.46) 51%, rgba(12,43,67,.12) 66%, rgba(12,43,67,0) 78%),
+      linear-gradient(0deg,rgba(8,26,42,.12),rgba(8,26,42,0) 45%) !important;
+  }
+  .hero-inner {
+    position:relative;
+    z-index:2;
+    padding:44px 0 50px !important;
+    margin:0 auto !important;
+    width:min(1240px,calc(100% - 112px));
+  }
+  .hero-content {
+    max-width:550px !important;
+    margin:0;
+    padding:0 !important;
+    background:none !important;
+    border:none !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+  .hero .eyebrow {
+    font-size:10px !important;
+    letter-spacing:.22em !important;
+    line-height:1.5;
+    margin:0 0 17px !important;
+    padding-top:19px !important;
+  }
+  .hero .eyebrow::before{width:42px !important;height:2px;}
+  .hero h1 {
+    font-size:clamp(42px,3.65vw,54px) !important;
+    line-height:1.06 !important;
+    letter-spacing:-.034em !important;
+    margin:0 0 19px !important;
+    text-wrap:balance;
+    color:#fff !important;
+    text-shadow:none !important;
+  }
+  .hero h1 span {color:#fff !important;}
+  .hero-description {
+    max-width:450px !important;
+    font-size:15px !important;
+    line-height:1.64 !important;
+    margin:0 0 25px !important;
+    color:rgba(255,255,255,.91) !important;
+    text-shadow:none !important;
+  }
+  .hero-buttons {gap:10px; margin:0 !important;align-items:center;}
+  .hero .button {
+    min-height:46px;
+    padding:11px 18px;
+    font-size:13px;
+    border-radius:5px;
+    box-shadow:none;
+  }
+  .hero .button:first-child {background:#f6fafd;color:#0b2d45;}
+  .hero .button:first-child:hover {background:#e8f2f8;}
+  .hero .button-outline {color:#fff;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.50);}
+  .hero .button-outline:hover {background:rgba(255,255,255,.17);}
+  .hero-dots {bottom:25px !important;right:clamp(28px,5vw,78px) !important;top:auto !important;}
+  .hero-dot {height:5px; width:27px; border-radius:4px;background:rgba(255,255,255,.37);}
+  .hero-dot.is-active {width:42px; background:#fff;}
+}
+@media (min-width:681px) and (max-width:1020px) {
+  .hero {height:465px;}
+  .hero .hero-slides .hero-slide {width:80% !important;}
+  .hero-shade {background:linear-gradient(90deg,#0c2b43 0%,#0c2b43 25%,rgba(12,43,67,.95) 37%,rgba(12,43,67,.63) 54%,rgba(12,43,67,.1) 82%,transparent 100%) !important;}
+  .hero-inner {width:calc(100% - 76px);padding:38px 0 !important;}
+  .hero-content {max-width:465px !important;}
+  .hero h1 {font-size:42px !important;}
+  .hero-description {max-width:405px !important;font-size:14px !important;}
+}
+/* Keep the previously approved mobile stack; never force wide photos to crop as tall banners. */
+@media (max-width:680px) {
+  .hero .hero-slides .hero-slide {filter:none !important;}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero .hero-slides .hero-slide{transition:none !important;}
+}
+
+
+/* Desktop: original full-width hero and slightly lighter navy fade.
+   Photo frame sizes and focal points match the corrected version. */
+@media (min-width: 981px) {
+  .hero {
+    --hero-stage-width: min(1440px, calc(100vw - 80px));
+    --hero-photo-width: calc(var(--hero-stage-width) * .56);
+    width: 100%;
+    height: max(480px, calc(var(--hero-photo-width) / 1.55));
+    min-height: 0 !important;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    background: #0d2d46;
+    isolation: isolate;
+  }
+  .hero .hero-slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+    background: transparent;
+  }
+  .hero .hero-slides .hero-slide {
+    left: auto !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: auto !important;
+    width: var(--hero-photo-width) !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    filter: none !important;
+    transform: none;
+    /* Invisible photo start prevents any rectangular image boundary. */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 11%, #000 32%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 11%, #000 32%);
+  }
+  .hero .hero-slides .hero-slide:nth-child(1) { object-position: 53% 50% !important; }
+  .hero .hero-slides .hero-slide:nth-child(2) { object-position: 50% 48% !important; }
+  .hero .hero-slides .hero-slide:nth-child(3) { object-position: 51% 50% !important; }
+  .hero .hero-shade {
+    display: block;
+    position: absolute;
+    inset: 0 0 0 auto !important;
+    width: var(--hero-photo-width);
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg,
+        #0d2d46 0%,
+        rgba(13,45,70,.93) 6%,
+        rgba(13,45,70,.70) 15%,
+        rgba(13,45,70,.38) 28%,
+        rgba(13,45,70,.13) 43%,
+        rgba(13,45,70,.02) 60%,
+        rgba(13,45,70,0) 73%),
+      linear-gradient(0deg, rgba(8,28,44,.12), transparent 48%) !important;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(ellipse at 33% 54%, rgba(64,112,144,.11), rgba(64,112,144,0) 58%);
+  }
+  .hero .hero-inner {
+    display: block;
+    width: min(1240px, calc(100% - 112px));
+    margin: 0 auto !important;
+    padding: 44px 0 50px !important;
+  }
+  .hero .hero-content { max-width: 550px !important; }
+  .hero .hero-buttons { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+  .hero .button { white-space: nowrap; min-width: 0; }
+  .hero .hero-dots {
+    right: clamp(28px, 5vw, 78px) !important;
+    bottom: 25px !important;
+    top: auto !important;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .services-section { margin-top: -14px; }
+}
+@media (min-width: 981px) and (max-width: 1199px) {
+  .hero {
+    --hero-stage-width: calc(100vw - 56px);
+    --hero-photo-width: calc(var(--hero-stage-width) * .55);
+    height: 430px;
+  }
+  .hero .hero-slides .hero-slide:nth-child(3) { object-position: 44% 50% !important; }
+  .hero .hero-inner { width: calc(100% - 76px); padding: 36px 0 !important; }
+  .hero .hero-content { max-width: 465px !important; }
+  .hero h1 { font-size: 42px !important; }
+  .hero .hero-description { max-width: 405px !important; font-size: 14px !important; }
+}
