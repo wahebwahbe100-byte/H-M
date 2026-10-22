@@ -151,60 +151,141 @@
     }));
   }
 
+
+
+  // Datenschutzhinweis / Hinweis zu technisch notwendigen Cookies
+  const NOTICE_KEY = 'hmPrivacyNoticeDismissed';
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const shouldShowPrivacyNotice = (() => {
+    try {
+      return localStorage.getItem(NOTICE_KEY) !== '1';
+    } catch {
+      return true;
+    }
+  })();
+
+  if (shouldShowPrivacyNotice) {
+    const notice = document.createElement('section');
+    notice.className = 'privacy-notice';
+    notice.setAttribute('role', 'dialog');
+    notice.setAttribute('aria-live', 'polite');
+    notice.setAttribute('aria-label', 'Datenschutzhinweis');
+    notice.innerHTML = `
+      <div class="privacy-notice__inner">
+        <h2 class="privacy-notice__title">Datenschutzhinweis</h2>
+        <p class="privacy-notice__text">Diese Website verwendet ausschließlich technisch notwendige Cookies bzw. lokale Speicherfunktionen, damit grundlegende Funktionen und die Sicherheit der Website gewährleistet werden. Es werden keine Statistik-, Marketing- oder Tracking-Cookies ohne Ihre Einwilligung gesetzt.</p>
+        <div class="privacy-notice__links">
+          <a href="datenschutz.html">Datenschutzerklärung</a>
+          <a href="impressum.html">Impressum</a>
+        </div>
+        <button class="privacy-notice__button" type="button">Hinweis schließen</button>
+      </div>
+    `;
+
+    const closeNotice = () => {
+      notice.classList.add('is-hiding');
+      const removeNotice = () => notice.remove();
+      if (prefersReducedMotion) {
+        removeNotice();
+      } else {
+        notice.addEventListener('transitionend', removeNotice, {once: true});
+        window.setTimeout(removeNotice, 260);
+      }
+      try {
+        localStorage.setItem(NOTICE_KEY, '1');
+      } catch {}
+    };
+
+    document.body.append(notice);
+    requestAnimationFrame(() => notice.classList.add('is-visible'));
+    const closeButton = notice.querySelector('.privacy-notice__button');
+    closeButton?.addEventListener('click', closeNotice);
+    notice.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeNotice();
+      }
+    });
+  }
+
+  // Website-Kontaktformular: Versenden über FormSubmit ohne externen E-Mail-Client.
   const form = $('#inquiry-form');
   if (form) {
-    const services = {terrassenueberdachung: 'Terrassenüberdachung', wintergarten: 'Wintergarten', insektenschutz: 'Insektenschutz & Fliegengitter', fenster: 'Fenster', rollladen: 'Rollläden', garagentore: 'Garagentore'};
+    const services = {
+      terrassenueberdachung: 'Terrassenüberdachung',
+      wintergarten: 'Wintergarten',
+      insektenschutz: 'Insektenschutz & Fliegengitter',
+      fenster: 'Fenster',
+      rollladen: 'Rollläden',
+      garagentore: 'Garagentore'
+    };
     const selected = new URLSearchParams(location.search).get('service');
     const option = services[selected] || selected;
-    if (option && [...$('#service').options].some(o => o.value === option)) $('#service').value = option;
-    const dialog = $('#inquiry-dialog');
-    const summary = $('#inquiry-summary');
-    let message = '';
-    const config = window.HM_CONFIG || {};
-    const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(config.contactEmail || '');
-    if (hasEmail) {
-      $('.form-note').textContent = 'Ihre Anfrage wird für Ihr E-Mail-Programm vorbereitet. Sie prüfen und versenden die Nachricht anschließend selbst.';
-      const note = $('.contact-preview-notice');
-      if (note) {
-        note.replaceChildren();
-        const title = document.createElement('strong'); title.textContent = 'Direkter Kontakt'; note.append(title);
-        const email = document.createElement('a'); email.href = 'mailto:' + config.contactEmail; email.textContent = config.contactEmail;
-        const p = document.createElement('p'); p.append(email); note.append(p);
-        if (config.phone) {const p = document.createElement('p'); const a = document.createElement('a');a.href = 'tel:' + config.phone.replace(/[^+\d]/g, '');a.textContent = config.phone;p.append(a);note.append(p);}
-        if (config.address) {const p = document.createElement('p');p.textContent = config.address;note.append(p);}
-      }
-      $('h2 + p', dialog).textContent = 'Ihre Anfrage ist bereit. Öffnen Sie sie in Ihrem E-Mail-Programm, prüfen Sie den Inhalt und versenden Sie sie selbst. Alternativ können Sie den Text kopieren oder herunterladen.';
-      const mail = document.createElement('a');mail.className = 'button';mail.id = 'email-inquiry';mail.textContent = 'Im E-Mail-Programm öffnen';$('.dialog-actions').prepend(mail);
+    if (option && [...$('#service').options].some(item => item.value === option)) {
+      $('#service').value = option;
     }
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      if (!form.reportValidity()) return;
-      const data = new FormData(form);
-      message = `Projektanfrage an H&M Bauelemente\n\nLeistung: ${data.get('service')}\nName: ${data.get('name').trim()}\nE-Mail: ${data.get('email').trim()}\nTelefon: ${data.get('phone').trim() || 'Nicht angegeben'}\n\nMein Projekt:\n${data.get('message').trim()}\n\nBitte kontaktieren Sie mich für ein persönliches Beratungsgespräch.`;
-      summary.textContent = message;
-      $('#copy-status').textContent = '';
-      if (hasEmail) $('#email-inquiry').href = `mailto:${config.contactEmail}?subject=${encodeURIComponent('Projektanfrage: ' + data.get('service'))}&body=${encodeURIComponent(message)}`;
-      dialog.showModal();document.body.classList.add('modal-open');
-    });
-    $('.dialog-close', dialog).addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', e => {
-      const r = dialog.getBoundingClientRect();
-      if (e.target === dialog && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) dialog.close();
-    });
-    dialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
-    $('#copy-inquiry').addEventListener('click', async () => {
+
+    const status = $('#form-status');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const submitLabel = submitButton.querySelector('.submit-label');
+    const normalButtonText = submitLabel.textContent;
+    const contactEmail = 'info@hm-bauelemente24.de';
+    const ajaxEndpoint = 'https://formsubmit.co/ajax/' + contactEmail;
+    let sending = false;
+
+    const setFeedback = (kind, text) => {
+      status.hidden = false;
+      status.classList.toggle('is-success', kind === 'success');
+      status.classList.toggle('is-error', kind === 'error');
+      status.textContent = text;
+      status.focus({preventScroll: true});
+    };
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (sending || !form.reportValidity()) return;
+      // A filled honeypot is an automated submission: do not send data.
+      if (form.querySelector('[name="_honey"]').value.trim()) return;
+
+      sending = true;
+      status.hidden = true;
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
+      submitLabel.textContent = 'Anfrage wird gesendet …';
+
+      const details = new FormData(form);
+      details.set('_replyto', String(details.get('email') || ''));
+      details.set('_url', location.href.split('#')[0]);
+      const data = Object.fromEntries(details.entries());
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 20000);
+
       try {
-        await navigator.clipboard.writeText(message);
-        $('#copy-status').textContent = 'Ihre Anfrage wurde in die Zwischenablage kopiert.';
+        const response = await fetch(ajaxEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data),
+          signal: controller.signal
+        });
+        const result = await response.json();
+        if (!response.ok || (result.success !== true && result.success !== 'true')) {
+          throw new Error('FormSubmit did not confirm submission');
+        }
+        form.reset();
+        setFeedback('success', 'Vielen Dank! Ihre Anfrage wurde übermittelt. Wir melden uns so bald wie möglich bei Ihnen.');
       } catch {
-        const selection = window.getSelection();const range = document.createRange();range.selectNodeContents(summary);selection.removeAllRanges();selection.addRange(range);
-        $('#copy-status').textContent = 'Der Text ist markiert. Sie können ihn jetzt manuell kopieren.';
+        // Do not claim a failed or successful delivery on an ambiguous network result.
+        setFeedback('error', 'Der Versand konnte nicht bestätigt werden. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an ' + contactEmail + '.');
+      } finally {
+        window.clearTimeout(timeout);
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+        submitLabel.textContent = normalButtonText;
+        sending = false;
       }
-    });
-    $('#download-inquiry').addEventListener('click', () => {
-      const url = URL.createObjectURL(new Blob(['\uFEFF' + message], {type: 'text/plain;charset=utf-8'}));
-      const a = document.createElement('a');a.href = url;a.download = 'HM-Bauelemente-Projektanfrage.txt';document.body.append(a);a.click();a.remove();setTimeout(() => URL.revokeObjectURL(url), 1000);
-      $('#copy-status').textContent = 'Der Download Ihrer Anfrage wurde gestartet.';
     });
   }
 })();

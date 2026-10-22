@@ -351,3 +351,107 @@ body{background:#fff;}
     padding: 34px 0;
   }
 }
+
+/* ===== Kompakter Datenschutzhinweis im H&M-Farbschema ===== */
+.privacy-notice {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 140;
+  width: min(440px, calc(100vw - 48px));
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .22s ease, transform .22s ease;
+}
+.privacy-notice.is-visible {opacity: 1; transform: translateY(0);}
+.privacy-notice.is-hiding {opacity: 0; transform: translateY(10px); pointer-events: none;}
+.privacy-notice__inner {
+  padding: 20px 22px 19px;
+  background: #ffffff;
+  border: 1px solid #dce5ec;
+  border-top: 4px solid #164969;
+  border-radius: 10px;
+  box-shadow: 0 12px 35px rgba(8, 35, 58, .20);
+  color: #102d43;
+}
+.privacy-notice__title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 750;
+  letter-spacing: -.02em;
+  color: #0b2b44;
+}
+.privacy-notice__text {
+  margin: 0 0 11px;
+  font-size: 13px;
+  line-height: 1.58;
+  color: #465b6b;
+}
+.privacy-notice__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0 0 14px;
+}
+.privacy-notice__links a {
+  color: #164969;
+  font-size: 12.5px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.privacy-notice__links a:hover {color: #0b2b44;}
+.privacy-notice__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 166px;
+  min-height: 42px;
+  padding: 9px 17px;
+  color: #fff;
+  background: #0b2b44;
+  border: 1px solid #0b2b44;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.2;
+  transition: background .18s ease, border-color .18s ease;
+}
+.privacy-notice__button:hover {background: #164969; border-color: #164969;}
+.privacy-notice__button:focus-visible,
+.privacy-notice__links a:focus-visible {outline: 3px solid #58a9d2; outline-offset: 3px;}
+@media (max-width: 680px) {
+  .privacy-notice {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    max-height: calc(100dvh - 24px);
+  }
+  .privacy-notice__inner {padding: 18px 17px 16px; border-radius: 8px;}
+  .privacy-notice__title {font-size: 17px; margin-bottom: 10px;}
+  .privacy-notice__text {font-size: 12.5px; line-height: 1.55;}
+  .privacy-notice__links {gap: 8px 16px; margin-bottom: 13px;}
+  .privacy-notice__button {min-height: 44px; width: 100%; font-size: 13px;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .privacy-notice {transition: none;}
+  .privacy-notice__button {transition: none;}
+}
+
+
+/* Kontaktformular – verlässlicher Versandstatus und klares Feedback */
+#inquiry-form .submit-button{gap:10px;transition:background .2s ease,box-shadow .2s ease,opacity .2s ease}
+#inquiry-form .submit-button:hover{box-shadow:0 8px 20px rgba(11,43,68,.17)}
+#inquiry-form .submit-button:disabled{cursor:wait;opacity:.75;transform:none;box-shadow:none}
+#inquiry-form .form-note{font-size:12px;color:#52677a;line-height:1.6;margin:17px 0 15px}
+#inquiry-form .form-small{margin:12px 0 0;font-size:11px;line-height:1.6}
+#inquiry-form .form-honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+#inquiry-form .form-feedback{padding:16px 18px;margin:14px 0 0;border-radius:7px;font-size:13px;line-height:1.6;font-weight:650;outline-offset:2px}
+#inquiry-form .form-feedback[hidden]{display:none!important}
+#inquiry-form .form-feedback.is-success{background:#ecf7f0;border:1px solid #9acbac;color:#184b30}
+#inquiry-form .form-feedback.is-error{background:#fff2ef;border:1px solid #edb3a5;color:#803b2a}
+@media(max-width:680px){#inquiry-form .form-note{font-size:11px}#inquiry-form .form-feedback{font-size:12px;padding:13px 14px}}
