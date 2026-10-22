@@ -455,3 +455,79 @@ body{background:#fff;}
 #inquiry-form .form-feedback.is-success{background:#ecf7f0;border:1px solid #9acbac;color:#184b30}
 #inquiry-form .form-feedback.is-error{background:#fff2ef;border:1px solid #edb3a5;color:#803b2a}
 @media(max-width:680px){#inquiry-form .form-note{font-size:11px}#inquiry-form .form-feedback{font-size:12px;padding:13px 14px}}
+/* Eight services and direct social links. */
+.service-grid.service-grid--complete {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.service-card[href="markisen.html"] .card-image img {
+  object-position: 50% 45%;
+}
+.service-card[href="vordaecher.html"] .card-image img,
+.detail-hero--vordaecher .detail-image img {
+  object-position: 50% 35%;
+}
+.social-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.social-links .social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 9px 11px;
+  border: 1px solid #ffffff38;
+  border-radius: 6px;
+  color: #fff;
+  background: #ffffff0d;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease;
+}
+.social-links .social-link .icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.social-links .social-link:hover {
+  color: #fff;
+  background: #ffffff20;
+  border-color: #ffffff80;
+}
+.social-links .social-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.social-links .social-link--whatsapp {
+  background: #176b45;
+  border-color: #3fa774;
+}
+.social-links .social-link--whatsapp:hover {
+  background: #1b7b50;
+  border-color: #7adcaa;
+}
+.contact-social {
+  border-top: 1px solid #ffffff26;
+  padding-top: 22px;
+  margin-top: 24px;
+}
+.contact-social h3 {
+  color: #fff;
+  font-size: 17px;
+  margin: 0;
+}
+.contact-social .social-links { margin-top: 14px; }
+@media (max-width: 1099px) {
+  .service-grid.service-grid--complete {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .social-links .social-link { transition: none; }
+}

@@ -217,7 +217,9 @@
       insektenschutz: 'Insektenschutz & Fliegengitter',
       fenster: 'Fenster',
       rollladen: 'Rollläden',
-      garagentore: 'Garagentore'
+      garagentore: 'Garagentore',
+      markisen: 'Markisen',
+      vordaecher: 'Vordächer'
     };
     const selected = new URLSearchParams(location.search).get('service');
     const option = services[selected] || selected;
